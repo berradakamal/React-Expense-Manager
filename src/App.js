@@ -1,26 +1,32 @@
+import { useState } from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 function App() {
-  let mich = [
+  let DUMMY_CONTENT = [
     {
       title: "Test de son",
       price: 32,
-      date: new Date(2021, 12, 23),
+      date: new Date(2021, 12, 5),
+      key: Math.random().toString(),
     },
     {
       title: "Test de machine",
       price: 90,
-      date: new Date(2021, 11, 23),
+      date: new Date(2021, 12, 5),
+      key: Math.random().toString(),
     },
   ];
+  const [allExpenses, addNewExpense] = useState(DUMMY_CONTENT);
   const expenseData = (expense) => {
-    console.log("APP.JS");
     console.log(expense);
+    addNewExpense((prevExpenses) => {
+      return [expense, ...prevExpenses];
+    });
   };
   return (
     <div>
       <NewExpense onAddExpense={expenseData} />
-      <Expenses items={mich} />
+      <Expenses items={allExpenses} />
     </div>
   );
 }

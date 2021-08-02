@@ -3,28 +3,29 @@ import "./Expenses.css";
 import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
 import ExpensesFilter from "./ExpensesFilter/ExpensesFilter";
+import { format } from "date-fns";
 
 const Expenses = (props) => {
   const [pickedDate, selectedDate] = useState("2021");
 
   const onSavedYear = (selectedYear) => {
     selectedDate(selectedYear);
-    console.log(selectedYear);
   };
+
+  const selectedItems = props.items.filter((item) => {
+    return format(new Date(item.date), "yyyy") === pickedDate;
+  });
 
   return (
     <Card className="expenses">
       <ExpensesFilter onSelected={onSavedYear} selected={pickedDate} />
-      <ExpenseItem
-        title={props.items[0].title}
-        price={props.items[0].price}
-        date={props.items[0].date}
-      ></ExpenseItem>
-      <ExpenseItem
-        title={props.items[1].title}
-        price={props.items[1].price}
-        date={props.items[1].date}
-      ></ExpenseItem>
+      {selectedItems.map((expense) => (
+        <ExpenseItem
+          title={expense.title}
+          date={expense.date}
+          price={expense.price}
+        />
+      ))}
     </Card>
   );
 };

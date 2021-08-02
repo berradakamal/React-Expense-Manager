@@ -1,10 +1,10 @@
-import { format } from "date-fns";
+import { format, fromUnixTime } from "date-fns";
 import "./ExpenseDate.css";
 
 const ExpenseDate = (props) => {
-  const month = format(props.date, "MMMM");
-  const day = format(props.date, "dd");
-  const year = format(props.date, "yy");
+  const month = format(new Date(props.date), "MMMM");
+  const day = format(new Date(props.date), "dd");
+  const year = format(new Date(props.date), "yyyy");
   return (
     <div className="expense-date">
       <div className="expense-date__month">{month}</div>
