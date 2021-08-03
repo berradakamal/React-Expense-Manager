@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./Expenses.css";
-import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
 import ExpensesFilter from "./ExpensesFilter/ExpensesFilter";
+import ExpensesList from "./ExpensesList";
 import { format } from "date-fns";
 
 const Expenses = (props) => {
@@ -19,13 +19,7 @@ const Expenses = (props) => {
   return (
     <Card className="expenses">
       <ExpensesFilter onSelected={onSavedYear} selected={pickedDate} />
-      {selectedItems.map((expense) => (
-        <ExpenseItem
-          title={expense.title}
-          date={expense.date}
-          price={expense.price}
-        />
-      ))}
+      <ExpensesList items={selectedItems} />
     </Card>
   );
 };
