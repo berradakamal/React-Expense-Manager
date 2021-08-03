@@ -17,12 +17,14 @@ function App() {
     },
   ];
   const [allExpenses, addNewExpense] = useState(DUMMY_CONTENT);
+
   const expenseData = (expense) => {
     console.log(expense);
     addNewExpense((prevExpenses) => {
       return [expense, ...prevExpenses];
     });
   };
+  console.log(allExpenses);
   return (
     <div>
       <NewExpense onAddExpense={expenseData} />
